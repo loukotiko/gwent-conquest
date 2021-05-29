@@ -12,7 +12,7 @@ Vue.component("conquest-bar", {
   <div class="conquest-bar-progress">
     <template v-if="editing">
       <span class="input-value" v-for="(step, index) in steps" :key="step" :class="'input-value--' + step">
-        <input :value="localConquest.steps[index]" @input.number="value => localConquest.steps[index] = event.target.value" />
+        <input :value="localConquest.steps[index]" @input="value => localConquest.steps[index] = +event.target.value" />
       </span>
       <span class="input-value input-value--current">
         <input v-model.number="localConquest.value" />
