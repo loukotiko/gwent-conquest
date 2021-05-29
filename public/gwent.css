@@ -16571,7 +16571,6 @@ body.is-android-os .c-footer.iron .play-also {
 }
 
 .p-profile .l-faction-bars__content {
-  background: rgba(255, 255, 255, 0.03);
   padding: 20px 20px 1px;
 }
 
@@ -16736,7 +16735,7 @@ body.is-android-os .c-footer.iron .play-also {
   position: absolute;
   top: -16px;
   right: calc(100% - 45px);
-  z-index: 1;
+  z-index: 11;
 }
 
 .p-profile .c-faction-bar__bar {
@@ -16757,8 +16756,8 @@ body.is-android-os .c-footer.iron .play-also {
   display: flex;
   -webkit-box-align: center;
   align-items: center;
-  -webkit-box-pack: center;
-  justify-content: center;
+  -webkit-box-pack: flex-start;
+  justify-content: flex-start;
   margin-bottom: 30px;
   position: relative;
   overflow: hidden;
@@ -16767,7 +16766,7 @@ body.is-android-os .c-footer.iron .play-also {
 .p-profile .c-faction-bar__bar > span {
   position: relative;
   text-shadow: 0 0 10px #000, 0 0 2px #000;
-  z-index: 1;
+  z-index: 12;
 }
 
 .p-profile .c-faction-bar__bar > div {
@@ -16797,11 +16796,11 @@ body.is-android-os .c-footer.iron .play-also {
   right: calc(100% - 47px);
 }
 
-.p-profile .c-faction-bar--nilfgaard .c-faction-bar__bar > div {
+.p-profile .c-faction-bar__bar .stats_progress--nilfgaard {
   background-image: url(../img/profile/bars/nilfgaard-bar.jpg);
 }
 
-.p-profile .c-faction-bar--nilfgaard .c-faction-bar__bar > div:after {
+.p-profile .c-faction-bar__bar .stats_progress--nilfgaard:after {
   background-image: url(../img/profile/bars/nilfgaard-end.png);
 }
 
@@ -16810,11 +16809,11 @@ body.is-android-os .c-footer.iron .play-also {
   right: calc(100% - 44px);
 }
 
-.p-profile .c-faction-bar--monsters .c-faction-bar__bar > div {
+.p-profile .c-faction-bar__bar .stats_progress--monsters {
   background-image: url(../img/profile/bars/monsters-bar.jpg);
 }
 
-.p-profile .c-faction-bar--monsters .c-faction-bar__bar > div:after {
+.p-profile .c-faction-bar__bar .stats_progress--monsters:after {
   background-image: url(../img/profile/bars/monsters-end.png);
 }
 
@@ -16823,11 +16822,11 @@ body.is-android-os .c-footer.iron .play-also {
   right: calc(100% - 44px);
 }
 
-.p-profile .c-faction-bar--skellige .c-faction-bar__bar > div {
+.p-profile .c-faction-bar__bar .stats_progress--skellige {
   background-image: url(../img/profile/bars/skellige-bar.jpg);
 }
 
-.p-profile .c-faction-bar--skellige .c-faction-bar__bar > div:after {
+.p-profile .c-faction-bar__bar .stats_progress--skellige:after {
   background-image: url(../img/profile/bars/skellige-end.png);
 }
 
@@ -16836,11 +16835,11 @@ body.is-android-os .c-footer.iron .play-also {
   right: calc(100% - 34px);
 }
 
-.p-profile .c-faction-bar--scoiatael .c-faction-bar__bar > div {
+.p-profile .c-faction-bar__bar .stats_progress--scoiatael {
   background-image: url(../img/profile/bars/scoiatael-bar.jpg);
 }
 
-.p-profile .c-faction-bar--scoiatael .c-faction-bar__bar > div:after {
+.p-profile .c-faction-bar__bar .stats_progress--scoiatael:after {
   background-image: url(../img/profile/bars/scoiatael-end.png);
 }
 
@@ -16849,24 +16848,25 @@ body.is-android-os .c-footer.iron .play-also {
   right: calc(100% - 44px);
 }
 
-.p-profile .c-faction-bar--northernrealms .c-faction-bar__bar > div {
+.p-profile .c-faction-bar__bar .stats_progress--northernrealms {
   background-image: url(../img/profile/bars/northernrealms-bar.jpg);
 }
 
-.p-profile .c-faction-bar--northernrealms .c-faction-bar__bar > div:after {
+.p-profile .c-faction-bar__bar .stats_progress--northernrealms:after {
   background-image: url(../img/profile/bars/northernrealms-end.png);
 }
 
-.p-profile .c-faction-bar--neutral .c-faction-bar__logo {
+.p-profile .c-faction-bar--neutral .c-faction-bar__logo,
+.p-profile .c-faction-bar__logo.c-faction-bar__logo--neutral {
   top: -20px;
   right: calc(100% - 48px);
 }
 
-.p-profile .c-faction-bar--neutral .c-faction-bar__bar > div {
+.p-profile .c-faction-bar__bar .stats_progress--neutral {
   background-image: url(../img/profile/bars/neutral-bar.jpg);
 }
 
-.p-profile .c-faction-bar--neutral .c-faction-bar__bar > div:after {
+.p-profile .c-faction-bar__bar .stats_progress--neutral:after {
   background-image: url(../img/profile/bars/neutral-end.png);
 }
 
@@ -16875,11 +16875,11 @@ body.is-android-os .c-footer.iron .play-also {
   right: calc(100% - 48px);
 }
 
-.p-profile .c-faction-bar--syndicate .c-faction-bar__bar > div {
+.p-profile .c-faction-bar__bar .stats_progress--syndicate {
   background-image: url(../img/profile/bars/syndicate-bar.jpg);
 }
 
-.p-profile .c-faction-bar--syndicate .c-faction-bar__bar > div:after {
+.p-profile .c-faction-bar__bar .stats_progress--syndicate:after {
   background-image: url(../img/profile/bars/syndicate-end.png);
 }
 
@@ -19912,7 +19912,7 @@ body.is-android-os .c-footer.iron .play-also {
   border-image-slice: 23;
   border-image-outset: 0;
   border-image-repeat: round;
-  padding-top: 376px;
+  padding-top: 36px;
 }
 
 @media screen and (max-width: 767px) {

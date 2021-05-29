@@ -10,11 +10,23 @@
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
 
     <link rel="stylesheet" href="./gwent.css" />
+    <style>
+      #app:not(.loaded) {
+        display: none;
+      }
+    </style>
   </head>
   <body class="t-black p-profile desktop">
     <div class="wrapper">
       <div id="app" class="content">
-        <player-header :user="user" @login="doLogin" @logout="doLogout" />
+        <div>
+          <player-header
+            :user="user"
+            @login="doLogin"
+            @logout="doLogout"
+          ></player-header>
+          <main-content :user="user"></main-content>
+        </div>
       </div>
     </div>
 
@@ -22,11 +34,12 @@
       import { firestorePlugin } from "https://cdn.jsdelivr.net/npm/vuefire@2.2.5";
       Vue.use(firestorePlugin);
 
-      import "./parts/playerHeader.js";
-
       var provider = new firebase.auth.GoogleAuthProvider();
-
       const db = firebase.firestore();
+
+      import "./parts/playerHeader.js";
+      import "./parts/mainContent.js";
+      import "./parts/progressBar.js";
 
       export default new Vue({
         el: "#app",
