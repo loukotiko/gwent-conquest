@@ -25,7 +25,7 @@
             @login="doLogin"
             @logout="doLogout"
           ></player-header>
-          <main-content :user="user"></main-content>
+          <main-content :user="user" v-if="user"></main-content>
         </div>
       </div>
     </div>
