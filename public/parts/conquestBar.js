@@ -1,5 +1,5 @@
 Vue.component("conquest-bar", {
-  template: /* tpl */ `<div class="conquest-bar">
+  template: /* tpl */ `<form class="conquest-bar" @submit.prevent="() => {forceEditing = false; $emit('validate', localConquest)}">
   <div class="conquest-bar-actions-left">
     <button class="conquest-bar-active" :class="{'conquest-bar-active--active': active}" @click="$emit('activate')"></button>
   </div>
@@ -22,10 +22,10 @@ Vue.component("conquest-bar", {
   </div>
   <div class="conquest-bar-actions-right">
     <template v-if="editing">
-      <button class="conquest-bar-small-button conquest-bar-delete" v-if="editing" @click="$emit('delete')"></button>
-      <button class="conquest-bar-small-button conquest-bar-validate" v-if="editing" @click="() => {forceEditing = false; $emit('validate', localConquest)}"></button>
+      <button type="button" class="conquest-bar-small-button conquest-bar-delete" v-if="editing" @click="$emit('delete')"></button>
+      <button type="submit" class="conquest-bar-small-button conquest-bar-validate" v-if="editing"></button>
     </template>
-    <button class="conquest-bar-small-button conquest-bar-edit" v-else @click="forceEditing = true"></button>
+    <button type="button" class="conquest-bar-small-button conquest-bar-edit" v-else @click="forceEditing = true"></button>
   </div>
 </div>`,
   props: ["conquest", "active"],

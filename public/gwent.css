@@ -339,10 +339,19 @@ h4,
   font-size: 24px;
 }
 
+.conquest-bar-view .conquest-bar-title h2 {
+  position: relative;
+  width: 80%;
+  margin: auto;
+}
+
 .conquest-bar-view .conquest-bar-title h2::before {
   content: attr(data-title);
   text-shadow: 0 0 10px #000, 0 0 2px #000;
   position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: -1;
 }
 
