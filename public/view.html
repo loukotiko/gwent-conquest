@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Gwent Conquête</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
+    <script defer src="/__/firebase/8.6.3/firebase-app.js"></script>
+    <script defer src="/__/firebase/8.6.3/firebase-auth.js"></script>
+    <script defer src="/__/firebase/8.6.3/firebase-firestore.js"></script>
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+    <style>
+      #app:not(.loaded) {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div v-for="message in messages" :key="message.id">
+        {{ message.text }}
+      </div>
+    </div>
+
+    <script type="module">
+      import { firestorePlugin } from "https://cdn.jsdelivr.net/npm/vuefire@2.2.5";
+
+      Vue.use(firestorePlugin);
+
+      const db = firebase.firestore();
+
+      export default new Vue({
+        el: "#app",
+        data() {
+          return {
+            messages: [],
+          };
+        },
+        methods: {},
+        firestore: {
+          messages: db.collection("messages"),
+        },
+        mounted() {
+          this.$el.classList.add("loaded");
+        },
+      });
+    </script>
+  </body>
+</html>
