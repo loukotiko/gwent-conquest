@@ -22,7 +22,7 @@
     url(/fonts/hinted-HalisGR-Book.ttf) format("truetype");
 }
 
-body {
+body:not(.transparent) {
   background: #121315 repeat-y center top;
   background-image: url(./img/section-bg/bg-1920.jpg);
 }
@@ -325,6 +325,27 @@ h4,
   margin-bottom: 30px;
   min-height: 50px;
 }
+.conquest-bar-view {
+  flex-direction: column-reverse;
+  align-items: stretch;
+}
+.conquest-bar-view .conquest-bar-progress {
+  margin-left: 36px;
+}
+
+.conquest-bar-view .conquest-bar-title {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 24px;
+}
+
+.conquest-bar-view .conquest-bar-title h2::before {
+  content: attr(data-title);
+  text-shadow: 0 0 10px #000, 0 0 2px #000;
+  position: absolute;
+  z-index: -1;
+}
+
 .conquest-bar-actions-left {
   margin-right: 10px;
 }
@@ -532,4 +553,9 @@ h4,
 
 .flip-list-move {
   transition: transform 1s;
+}
+
+.see-conquest {
+  float: right;
+  text-decoration: none;
 }

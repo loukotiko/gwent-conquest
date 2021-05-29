@@ -1,46 +1,82 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Gwent Conquête</title>
+    <title>Overlay</title>
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
 
     <script defer src="/__/firebase/8.6.3/firebase-app.js"></script>
     <script defer src="/__/firebase/8.6.3/firebase-auth.js"></script>
     <script defer src="/__/firebase/8.6.3/firebase-firestore.js"></script>
     <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+
+    <link rel="stylesheet" href="./gwent.css" />
     <style>
       #app:not(.loaded) {
         display: none;
       }
     </style>
   </head>
-  <body>
-    <div id="app">
-      <div v-for="message in messages" :key="message.id">
-        {{ message.text }}
+  <body class="transparent">
+    <div class="wrapper">
+      <div id="app" class="content">
+        <div v-if="conquest">
+          <div class="conquest-bar conquest-bar-view">
+            <div class="conquest-bar-title">
+              <h2 class="yellow-text" :data-title="conquest.title">
+                {{conquest.title}}
+              </h2>
+            </div>
+            <div class="conquest-bar-progress">
+              <progress-bar
+                :steps="conquest.steps"
+                :value="conquest.value"
+              ></progress-bar>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
     <script type="module">
       import { firestorePlugin } from "https://cdn.jsdelivr.net/npm/vuefire@2.2.5";
-
       Vue.use(firestorePlugin);
 
       const db = firebase.firestore();
+
+      import "./parts/progressBar.js";
 
       export default new Vue({
         el: "#app",
         data() {
           return {
-            messages: [],
+            user: null,
+            userData: null,
+            conquest: null,
           };
         },
-        methods: {},
-        firestore: {
-          messages: db.collection("messages"),
+        methods: {
+          doLogin() {
+            firebase.auth().signInWithPopup(provider);
+          },
+          doLogout() {
+            firebase.auth().signOut();
+          },
         },
         mounted() {
           this.$el.classList.add("loaded");
+          firebase.auth().onAuthStateChanged((user) => {
+            this.user = user;
+            this.$bind("userData", db.doc(`users/${user.uid}`));
+          });
+        },
+        watch: {
+          "userData.activeConquest"(conquestId) {
+            if (conquestId)
+              this.$bind(
+                "conquest",
+                db.doc(`users/${this.user.uid}/conquests/${conquestId}`)
+              );
+          },
         },
       });
     </script>
