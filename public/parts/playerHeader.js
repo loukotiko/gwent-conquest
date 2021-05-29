@@ -1,25 +1,26 @@
 Vue.component("player-header", {
-  template: /* tpl */ `<div class="l-player-details">
-  <div class="l-player-details__left">
-    <div class="l-player-details__basic">
-      <strong class="l-player-details__name">
-        <template v-if="user">{{ user.displayName }}
-        </template>
-        <template v-else>
-          <button @click="$emit('login')">Me connecter</button>
-        </template>
+  template: /* tpl */ `<div class="player-header">
+  <div class="player-header__left">
+    <div class="player-header__basic">
+      <strong class="player-header-name yellow-text">
+        <template v-if="user">{{ user.displayName }}</template>
       </strong>
     </div>
   </div>
-  <div class="l-player-details__table l-player-details__table--single">
+  <div class="player-header__right">
     <template v-if="user">
-      <div class="l-player-details__table-ladder">
-        <button @click="$emit('logout')"><span>Déconnexion</span></button>
+      <div class="player-header-logout">
+        <button class="title yellow-text" @click="$emit('logout')">Déconnexion</button>
       </div>
-      <div class="l-player-details__table-position">
-        Réussis : <strong>12</strong>
+      <div class="player-header-data">
+        Conquêtes <strong>12/103</strong>
       </div>
-      <div class="l-player-details__table-mmr">Reste : <strong>9</strong></div>
+      <div class="player-header-data">Complétion <strong>14%</strong></div>
+    </template>
+    <template v-else>
+      <div class="player-header-logout">
+        <button class="title yellow-text" @click="$emit('login')">Me connecter</button>
+      </div>
     </template>
   </div>
 </div>`,

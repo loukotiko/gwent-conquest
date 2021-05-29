@@ -1,27 +1,36 @@
 Vue.component("progress-bar", {
-  template: /* tpl */ `<div class="c-faction-bar c-faction-bar--gwent">
+  template: /* tpl */ `<div class="progress-bar">
   <img
-    :src="'/img/profile/bars/'+logoColor+'.png'"
+    :src="'/img/profile/bars/' + logoColor + '.png'"
     alt="GWENT"
-    class="c-faction-bar__logo"
-    :class="'c-faction-bar__logo--' + logoColor"
+    class="progress-bar__logo"
   />
-  <div class="c-faction-bar__bar" data-max="1311" data-value="1296">
+  <div class="progress-bar__bar" data-max="1311" data-value="1296">
     <div v-for="(step, index) in steps" :key="index"
-      class="stats_progress" :class="'stats_progress--' + stepColor(index)"
+      class="progress progress-placeholder" :class="'progress--' + stepColor(index)"
       :style="{ width: percentLength(index) + '%', zIndex: 10-index }"></div>
-    <div class="stats_progress" :style="{ width: percentCurrentLength + '%', zIndex: 10 }"></div>
-    <span :style="{ display: 'inline-block', textAlign: 'center', minWidth: '200px', width: percentCurrentLength + '%' }">
-      <strong class="stats_count">{{current}}</strong> /
-      <span class="stats_overall">{{steps[steps.length -1]}}</span>
+    <div v-if="value"
+      class="progress" :style="{ width: percentCurrentLength + '%', zIndex: 10 }"
+      :class="{['progress--' + logoColor]: true, 'progress-placeholder': currentStep === -1}"></div>
+    <span class="progress_data" :style="{width: percentCurrentLength + '%'}">
+      <strong class="progress_count">{{value}}</strong> /
+      <span class="progress_overall">{{steps[steps.length -1]}}</span>
     </span>
   </div>
 </div>`,
-  props: ["steps", "current"],
+  props: ["steps", "value"],
   computed: {
+    currentStep() {
+      return this.steps.reduce(
+        (step, currentStep, currentIndex) =>
+          this.value >= currentStep ? currentIndex : step,
+        -1
+      );
+    },
     logoColor() {
-      return this.current != this.steps[this.steps.length - 1]
-        ? "neutral"
+      if (this.currentStep === -1) return "empty";
+      return this.value != this.steps[this.steps.length - 1]
+        ? this.stepColor(this.currentStep) || this.stepColor(0, true)
         : "gwent";
     },
     percentCurrentLength() {
@@ -29,9 +38,8 @@ Vue.component("progress-bar", {
         0,
         Math.min(
           100,
-          Math.round(
-            (this.current / this.steps[this.steps.length - 1]) * 10000
-          ) / 100
+          Math.round((this.value / this.steps[this.steps.length - 1]) * 10000) /
+            100
         )
       );
     },
@@ -48,8 +56,11 @@ Vue.component("progress-bar", {
         )
       );
     },
-    stepColor(index) {
-      return ["neutral", "nilfgaard", "syndicate"].reverse()[3 - index - 1];
+    stepColor(index, previous) {
+      if (index === -1) return "";
+      return ["bronze", "silver", "gold", "gwent"].reverse()[
+        this.steps.length - index - 1
+      ];
     },
   },
 });

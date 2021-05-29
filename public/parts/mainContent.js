@@ -1,22 +1,26 @@
 Vue.component("main-content", {
-  template: /* tpl */ `<div class="l-tabs">
-  <div class="l-tabs__content">
-    <div class="l-raf is-active">
-      <div class="l-raf__borders">
-        <h2><span>Mes conquêtes</span></h2>
+  template: /* tpl */ `<div class="main-content">
+    <h1 class="scratched-title"><span class="yellow-text">Mes conquêtes</span></h1>
 
-        <div class="l-faction-bars">
-          <div class="l-faction-bars__content">
-            <progress-bar :steps="[12,24,32]" :current="0"></progress-bar>
-            <progress-bar :steps="[12,24,32]" :current="6"></progress-bar>
-            <progress-bar :steps="[12,24,32]" :current="16"></progress-bar>
-            <progress-bar :steps="[12,24,32]" :current="28"></progress-bar>
-            <progress-bar :steps="[12,24,32]" :current="32"></progress-bar>
-          </div>
-        </div>
-      </div>
+    <div class="bars">
+      <conquest-bar v-for="index in [0,1,2,3,4]" :key="index"
+        :conquest="conquest"
+        :active="active === index"
+        @activate="() => active = index"
+      ></conquest-bar>
     </div>
-  </div>
+    
+    <g-button>Ajouter une conquête</g-button>
 </div>`,
   props: ["user"],
+  data() {
+    return {
+      active: 0,
+      conquest: {
+        title: "Archi-méga-super-griffon",
+        steps: [20, 30, 40, 50],
+        value: 12,
+      },
+    };
+  },
 });
