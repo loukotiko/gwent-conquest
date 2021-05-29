@@ -1,3 +1,5 @@
+const db = firebase.firestore();
+
 Vue.component("player-header", {
   template: /* tpl */ `<div class="player-header">
   <div class="player-header__left">
@@ -13,9 +15,9 @@ Vue.component("player-header", {
         <button class="title yellow-text" @click="$emit('logout')">Déconnexion</button>
       </div>
       <div class="player-header-data">
-        Conquêtes <strong>12/103</strong>
+        Conquêtes <strong>{{completedConquests.length}}/{{conquests.length}}</strong>
       </div>
-      <div class="player-header-data">Complétion <strong>14%</strong></div>
+      <div class="player-header-data">Complétion <strong>{{conquestsCompletion}}%</strong></div>
     </template>
     <template v-else>
       <div class="player-header-logout">
@@ -25,4 +27,34 @@ Vue.component("player-header", {
   </div>
 </div>`,
   props: ["user"],
+  data() {
+    return {
+      conquests: [],
+    };
+  },
+  computed: {
+    completedConquests() {
+      return this.conquests.filter(
+        (conquest) =>
+          conquest.value === conquest.steps[conquest.steps.length - 1]
+      );
+    },
+    conquestsCompletion() {
+      return (
+        Math.round(
+          (this.completedConquests.length / this.conquests.length) * 10000
+        ) / 100 || 0
+      );
+    },
+  },
+  watch: {
+    "user.uid": {
+      immediate: true,
+      handler(id) {
+        if (id) {
+          this.$bind("conquests", db.collection(`users/${id}/conquests`));
+        }
+      },
+    },
+  },
 });

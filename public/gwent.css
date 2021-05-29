@@ -325,6 +325,12 @@ h4,
   margin-bottom: 30px;
   min-height: 50px;
 }
+.conquest-bar-actions-left {
+  margin-right: 10px;
+}
+.conquest-bar-actions-right {
+  margin-left: 10px;
+}
 .conquest-bar-title {
   padding-right: 20px;
 }
@@ -341,7 +347,6 @@ h4,
   background-position: center center;
   background-repeat: no-repeat;
   cursor: pointer;
-  margin-right: 10px;
 }
 
 .conquest-bar-active.conquest-bar-active--active {
@@ -353,9 +358,8 @@ h4,
   background-size: cover;
   width: 30px;
   height: 30px;
-  margin-left: 30px;
   display: -webkit-box;
-  display: flex;
+  display: inline-flex;
   -webkit-box-align: center;
   align-items: center;
   -webkit-box-pack: center;
@@ -364,6 +368,7 @@ h4,
   font-size: 42px;
   padding: 0;
   cursor: pointer;
+  margin-left: 20px;
 }
 
 .conquest-bar-edit::after {
@@ -376,6 +381,13 @@ h4,
 .conquest-bar-validate::after {
   content: "";
   background-image: url(../img/profile/refer-a-friend/check.png);
+  background-size: cover;
+  width: 30px;
+  height: 30px;
+}
+.conquest-bar-delete::after {
+  content: "";
+  background-image: url(../img/profile/refer-a-friend/delete.png);
   background-size: cover;
   width: 30px;
   height: 30px;
@@ -457,7 +469,7 @@ h4,
 .input-value {
   position: relative;
   display: inline-block;
-  margin-right: 30px;
+  margin-right: 20px;
 }
 
 .input-value::before {
@@ -516,4 +528,8 @@ h4,
 
 .input-value.input-value--gwent::before {
   background-image: url("./img/profile/bars/gwent.png");
+}
+
+.flip-list-move {
+  transition: transform 1s;
 }

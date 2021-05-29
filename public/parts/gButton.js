@@ -1,8 +1,7 @@
 Vue.component("g-button", {
-  template: /* tpl */ `<button class="g-button">
+  template: /* tpl */ `<button v-bind="$attrs" v-on="$listeners" class="g-button">
     <slot></slot>
   </button>`,
-  props: ["user"],
   data() {
     return {
       conquest: {

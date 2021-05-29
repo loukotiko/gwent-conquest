@@ -47,9 +47,7 @@
         el: "#app",
         data() {
           return {
-            messages: [],
             user: null,
-            newMessage: "",
           };
         },
         methods: {
@@ -59,20 +57,6 @@
           doLogout() {
             firebase.auth().signOut();
           },
-          submit() {
-            db.collection("messages")
-              .add({ text: this.newMessage })
-              .then((docRef) => {
-                console.log("Document written with ID: ", docRef.id);
-              })
-              .catch((error) => {
-                console.error("Error adding document: ", error);
-              });
-            this.newMessage = "";
-          },
-        },
-        firestore: {
-          messages: db.collection("messages"),
         },
         mounted() {
           this.$el.classList.add("loaded");
