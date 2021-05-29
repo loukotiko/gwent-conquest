@@ -14,7 +14,7 @@
   <body class="t-black p-profile desktop">
     <div class="wrapper">
       <div id="app" class="content">
-        <player-header :user="user" @login="doLogin" />
+        <player-header :user="user" @login="doLogin" @logout="doLogout" />
       </div>
     </div>
 
@@ -40,6 +40,9 @@
         methods: {
           doLogin() {
             firebase.auth().signInWithPopup(provider);
+          },
+          doLogout() {
+            firebase.auth().signOut();
           },
           submit() {
             db.collection("messages")
