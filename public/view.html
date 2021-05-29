@@ -42,6 +42,8 @@
       Vue.use(firestorePlugin);
 
       const db = firebase.firestore();
+      const params = new URLSearchParams(location.search);
+      const uid = params.get("u");
 
       import "./parts/progressBar.js";
 
@@ -62,19 +64,20 @@
             firebase.auth().signOut();
           },
         },
+        firestore() {
+          return {
+            userData: db.doc(`users/${uid}`),
+          };
+        },
         mounted() {
           this.$el.classList.add("loaded");
-          firebase.auth().onAuthStateChanged((user) => {
-            this.user = user;
-            this.$bind("userData", db.doc(`users/${user.uid}`));
-          });
         },
         watch: {
           "userData.activeConquest"(conquestId) {
             if (conquestId)
               this.$bind(
                 "conquest",
-                db.doc(`users/${this.user.uid}/conquests/${conquestId}`)
+                db.doc(`users/${uid}/conquests/${conquestId}`)
               );
           },
         },

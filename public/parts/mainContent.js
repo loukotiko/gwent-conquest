@@ -21,7 +21,7 @@ Vue.component("main-content", {
       ></conquest-bar>
     </transition-group>
     
-    <a :href="'/view.html#' + user.uid" rel="noopener" target="_blank" class="see-conquest">
+    <a :href="'/view.html?u=' + user.uid" rel="noopener" target="_blank" class="see-conquest">
       <g-button>Voir la conquête en cours</g-button>
     </a>
     <g-button @click="addConquest">Ajouter une conquête</g-button>
