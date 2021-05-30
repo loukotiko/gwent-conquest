@@ -64,7 +64,7 @@ Vue.component("main-content", {
       return this.user;
     },
     self() {
-      return this.user && uid === this.user.uid;
+      return this.user && (uid === this.user.uid || !uid);
     },
     uid() {
       return uid || (this.user && this.user.uid);
