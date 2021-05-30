@@ -533,7 +533,7 @@ a.player-header-data .icon {
   margin: -8px;
   border: 0;
   color: #fadf7a;
-  width: calc(100% - 38px);
+  width: 100%;
   border: 1px solid #564823;
 }
 
