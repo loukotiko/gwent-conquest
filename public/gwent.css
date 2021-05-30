@@ -179,7 +179,7 @@ h4,
 .main-content {
   background: url(./img/profile/bg-1920.jpg) repeat;
   box-shadow: 0 4px 12px rgb(0 0 0 / 70%);
-  margin-bottom: 80px;
+  margin-bottom: 20px;
   padding: 23px;
   position: relative;
   border-width: 23px;
@@ -573,4 +573,11 @@ h4,
 .see-conquest {
   float: right;
   text-decoration: none;
+}
+
+.credits {
+  color: #575652;
+  font-family: HalisGR-Book, sans-serif;
+  font-style: italic;
+  padding: 0 12px;
 }

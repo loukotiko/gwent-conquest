@@ -26,6 +26,11 @@
             @logout="doLogout"
           ></player-header>
           <main-content :user="user" v-if="user"></main-content>
+          <p class="credits">
+            Ce site n'est pas officiel et n'est en aucun cas affilié à CD
+            Projekt. Il a été réalisé par Tikoati, un joueur de Gwent qui
+            {{randomWhat}}.
+          </p>
         </div>
       </div>
     </div>
@@ -43,11 +48,27 @@
       import "./parts/progressBar.js";
       import "./parts/gButton.js";
 
+      function getRandom(array) {
+        return array[Math.floor(array.length * Math.random())];
+      }
+
       export default new Vue({
         el: "#app",
         data() {
           return {
             user: null,
+            randomWhat: getRandom([
+              "ne missplay jamais",
+              "est aussi beau que ses cheveux",
+              "joue Perce-Neige en première carte",
+              "n'a plus de cartes à la 3e manche",
+              "oublie de compter les points",
+              "aime bien Echop",
+              "casse des barils",
+              "vous fait un bisou",
+              "stream parfois sur Twitch",
+              "est si nul..",
+            ]),
           };
         },
         methods: {
