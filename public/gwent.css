@@ -58,6 +58,20 @@ button {
   padding: 0 16px;
 }
 
+.red-text {
+  background-image: linear-gradient(to right, #e06161, #ff5f5f);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
+}
+
+.green-text {
+  background-image: linear-gradient(to right, #6af3f3, #1cdcb0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none;
+}
+
 .yellow-text {
   background-image: linear-gradient(to right, #fadf7a, #e2a73e);
   -webkit-background-clip: text;
@@ -155,8 +169,20 @@ h4,
   padding: 8px;
 }
 
+a.player-header-data {
+  text-decoration: none;
+  font-size: 16px;
+}
+
+a.player-header-data .icon {
+  font-size: 32px;
+  line-height: 28px;
+}
+
 .player-header-data {
   width: 128px;
+  padding: 8px;
+  box-sizing: border-box;
   text-align: center;
   font-size: 18px;
   font-weight: 100;
@@ -338,14 +364,6 @@ h4,
   margin-bottom: 30px;
   min-height: 50px;
 }
-.conquest-bar--disactivate {
-  margin-bottom: 60px;
-  min-height: auto;
-  margin-top: -83px;
-  z-index: 1;
-  position: relative;
-}
-
 .conquest-bar-view {
   flex-direction: column-reverse;
   align-items: stretch;
@@ -391,7 +409,8 @@ h4,
 }
 
 .conquest-bar-active {
-  display: flex;
+  display: inline-flex;
+  vertical-align: middle;
   width: 40px;
   height: 40px;
   background-image: url(./img/netdecking/guide-invalid-8500a138.png);
@@ -445,12 +464,13 @@ h4,
 }
 
 .scratched-title {
-  font-size: 30px;
-  line-height: 30px;
+  font-size: 42px;
+  line-height: 42px;
   text-align: center;
   overflow: hidden;
-  margin-bottom: 50px;
+  margin-bottom: 60px;
   position: relative;
+  margin-top: 10px;
 }
 
 .scratched-title span {
@@ -585,14 +605,57 @@ h4,
   transition: transform 1s;
 }
 
-.see-conquest {
-  float: right;
-  text-decoration: none;
-}
-
 .credits {
   color: #575652;
   font-family: HalisGR-Book, sans-serif;
   font-style: italic;
   padding: 0 12px;
+}
+
+.top-left-actions,
+.top-right-actions {
+  position: absolute;
+  top: 56px;
+}
+
+.top-left-actions {
+  left: 23px;
+}
+
+.top-right-actions {
+  right: 23px;
+}
+
+.disactive-button {
+  font-size: 18px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.see-conquest {
+  color: #d9d8cb;
+  font-family: HalisGR-Book, sans-serif;
+  text-decoration: none;
+  line-height: 40px;
+  font-size: 16px;
+}
+
+.share-conquest {
+  text-decoration: none;
+  margin-left: auto;
+}
+
+.loading {
+  margin: auto;
+  padding: 60px;
+  color: #d9d8cb;
+  font-family: HalisGR-Book, sans-serif;
+  font-size: 32px;
+  text-align: center;
+  font-style: italic;
+}
+
+.actions-bottom {
+  display: flex;
+  justify-content: space-between;
 }

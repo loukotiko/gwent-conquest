@@ -1,6 +1,9 @@
+const params = new URLSearchParams(location.search);
+const uid = params.get("u");
+
 Vue.component("conquest-bar", {
   template: /* tpl */ `<form class="conquest-bar" @submit.prevent="() => {forceEditing = false; $emit('validate', localConquest)}">
-  <div class="conquest-bar-actions-left">
+  <div class="conquest-bar-actions-left" v-if="editable && self">
     <button class="conquest-bar-active" :class="{'conquest-bar-active--active': active}" @click="$emit('activate')"></button>
   </div>
   <div class="conquest-bar-title">
@@ -19,16 +22,19 @@ Vue.component("conquest-bar", {
       </span>
     </template>
     <progress-bar v-else :steps="localConquest.steps" :value="localConquest.value"></progress-bar>
+    <div class="Global progression">
+      Autres trucs en dessous
+    </div>
   </div>
-  <div class="conquest-bar-actions-right">
+  <div class="conquest-bar-actions-right" v-if="editable && self">
     <template v-if="editing">
-      <button type="button" class="conquest-bar-small-button conquest-bar-delete" v-if="editing" @click="$emit('delete')"></button>
-      <button type="submit" class="conquest-bar-small-button conquest-bar-validate" v-if="editing"></button>
+      <button type="button" class="conquest-bar-small-button conquest-bar-delete" v-if="self" @click="$emit('delete')"></button>
+      <button type="submit" class="conquest-bar-small-button conquest-bar-validate"></button>
     </template>
     <button type="button" class="conquest-bar-small-button conquest-bar-edit" v-else @click="forceEditing = true"></button>
   </div>
 </div>`,
-  props: ["conquest", "active"],
+  props: ["conquest", "active", "self", "editable"],
   data() {
     return {
       forceEditing: false,

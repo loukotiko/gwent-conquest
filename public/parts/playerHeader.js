@@ -14,10 +14,23 @@ Vue.component("player-header", {
       <div class="player-header-logout">
         <button class="title yellow-text" @click="$emit('logout')">Déconnexion</button>
       </div>
-      <div class="player-header-data">
-        Objectifs <strong>{{completedConquests.length}}/{{conquests.length}}</strong>
-      </div>
-      <div class="player-header-data">Complétion <strong>{{conquestsCompletion}}%</strong></div>
+      <template v-if="userData">
+        <div class="player-header-data red-text" v-if="userData.activeConquest === -1">
+          Aucun objectif en cours
+        </div>
+        <a v-else :href="'/view.html?u=' + user.uid" rel="noopener" target="_blank" class="player-header-data green-text">
+          <div class="icon">👁</div> Objectif en cours 
+        </a>
+        <div class="player-header-data">
+          Objectifs <strong>{{completedConquests.length}}/{{conquests.length}}</strong>
+        </div>
+        <div class="player-header-data">Complétion <strong>{{conquestsCompletion}}%</strong></div>
+      </template>
+      <template v-else>
+        <div class="player-header-data"><strong>-</strong></div>
+        <div class="player-header-data">Objectifs <strong>-</strong></div>        
+        <div class="player-header-data">Complétion <strong>-</strong></div>
+      </template>
     </template>
     <template v-else>
       <div class="player-header-logout">
@@ -30,6 +43,7 @@ Vue.component("player-header", {
   data() {
     return {
       conquests: [],
+      userData: null,
     };
   },
   computed: {
@@ -52,6 +66,7 @@ Vue.component("player-header", {
       immediate: true,
       handler(id) {
         if (id) {
+          this.$bind("userData", db.doc(`users/${id}`));
           this.$bind("conquests", db.collection(`users/${id}/conquests`));
         }
       },

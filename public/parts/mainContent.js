@@ -1,3 +1,6 @@
+const params = new URLSearchParams(location.search);
+const uid = params.get("u");
+
 const db = firebase.firestore();
 
 function percentCompletion(conquest) {
@@ -9,20 +12,27 @@ function isEndedConquest(conquest) {
 
 Vue.component("main-content", {
   template: /* tpl */ `<div class="main-content">
-    <h2 class="scratched-title"><span class="yellow-text">Mes objectifs</span></h2>
+    <h2 class="scratched-title"><span class="yellow-text">
+      <template v-if="self">Mes objectifs</template>
+      <template v-else>{{userData.displayName}}</template>
+    </span></h2>
 
-    <div class="conquest-bar conquest-bar--disactivate">
-      <div class="conquest-bar-actions-left">
-        <button class="conquest-bar-active" :class="{'conquest-bar-active--active': !userData || userData.activeConquest === -1}" @click="disactivateConquest"></button>
-      </div>
+    <div class="top-left-actions" v-if="self">
+      <button class="disactive-button" @click="disactivateConquest">
+        <span class="conquest-bar-active" :class="{'conquest-bar-active--active': !userData || userData.activeConquest === -1}"></span>
+        <span class="title yellow-text">
+          Désactiver l'objectif en cours
+        </span>
+      </button>
+    </div>
 
-      <div class="conquest-bar-title">
-        <span class="title yellow-text">Désactiver l'objectif en cours</span>
-      </div>
+    <div class="top-right-actions">
     </div>
 
     <transition-group name="flip-list" tag="bars">
       <conquest-bar v-for="(conquest, index) in sortedConquests" :key="conquest.id"
+        :self="self"
+        :editable="editable"
         :conquest="conquest"
         :active="userData && userData.activeConquest === conquest.id"
         @activate="activateConquest(conquest)"
@@ -30,11 +40,16 @@ Vue.component("main-content", {
         @validate="(conquest) => validateConquest(conquest)"
       ></conquest-bar>
     </transition-group>
+    <div v-if="!sortedConquests.length" class="loading">
+      Chargement des objectifs...
+    </div>
     
-    <a :href="'/view.html?u=' + user.uid" rel="noopener" target="_blank" class="see-conquest">
-      <g-button>Voir l'objectif en cours</g-button>
-    </a>
-    <g-button @click="addConquest">Ajouter un objectif</g-button>
+    <div class="actions-bottom" v-if="self">
+      <g-button @click="addConquest">Ajouter un objectif</g-button>
+      <a :href="'/?u=' + uid" rel="noopener" target="_blank" class="share-conquest">
+        <g-button>Partager les objectifs</g-button>
+      </a>
+    </div>
 </div>`,
   props: ["user"],
   data() {
@@ -45,6 +60,15 @@ Vue.component("main-content", {
     };
   },
   computed: {
+    editable() {
+      return this.user;
+    },
+    self() {
+      return this.user && uid === this.user.uid;
+    },
+    uid() {
+      return uid || (this.user && this.user.uid);
+    },
     sortedConquests() {
       const sortedConquest = [...this.conquests];
 
@@ -66,6 +90,7 @@ Vue.component("main-content", {
   },
   methods: {
     addConquest() {
+      if (!this.self) return;
       db.collection(`users/${this.user.uid}/conquests`)
         .add({
           title: "Nouvel objectif",
@@ -81,6 +106,7 @@ Vue.component("main-content", {
         });
     },
     disactivateConquest() {
+      if (!this.self) return;
       db.doc(`users/${this.user.uid}`).set(
         {
           activeConquest: -1,
@@ -89,6 +115,7 @@ Vue.component("main-content", {
       );
     },
     activateConquest(conquest) {
+      if (!this.self) return;
       db.doc(`users/${this.user.uid}`).set(
         {
           activeConquest: conquest.id,
@@ -98,21 +125,34 @@ Vue.component("main-content", {
       );
     },
     validateConquest(conquest) {
-      db.doc(`users/${this.user.uid}/conquests/${conquest.id}`).set(
-        {
-          ...conquest,
-          dirty: true,
-        },
-        { merge: true }
-      );
+      if (this.self) {
+        db.doc(`users/${this.user.uid}/conquests/${conquest.id}`).set(
+          {
+            ...conquest,
+            dirty: true,
+          },
+          { merge: true }
+        );
+      } else {
+        db.doc(
+          `users/${uid}/conquests/${conquest.id}/participants/${this.user.uid}`
+        ).set(
+          {
+            ...conquest,
+            dirty: true,
+          },
+          { merge: true }
+        );
+      }
     },
     deleteConquest(conquest) {
+      if (!this.self) return;
       if (!confirm("Voulez-vous supprimer cet objectif ?")) return;
       db.doc(`users/${this.user.uid}/conquests/${conquest.id}`).delete();
     },
   },
   watch: {
-    "user.uid": {
+    uid: {
       immediate: true,
       handler(id) {
         if (id) {

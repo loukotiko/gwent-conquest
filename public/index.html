@@ -43,7 +43,7 @@
             @login="doLogin"
             @logout="doLogout"
           ></player-header>
-          <main-content :user="user" v-if="user"></main-content>
+          <main-content :user="user" v-if="user || viewUid"></main-content>
           <p class="credits">
             Ce site n'est pas officiel et n'est en aucun cas affilié à CD
             Projekt. Il a été réalisé par Tikoati, un joueur de Gwent qui
@@ -56,6 +56,9 @@
     <script type="module">
       import { firestorePlugin } from "https://cdn.jsdelivr.net/npm/vuefire@2.2.5";
       Vue.use(firestorePlugin);
+
+      const params = new URLSearchParams(location.search);
+      const viewUid = params.get("u");
 
       var provider = new firebase.auth.GoogleAuthProvider();
       const db = firebase.firestore();
@@ -75,6 +78,7 @@
         data() {
           return {
             user: null,
+            viewUid,
             randomWhat: getRandom([
               "ne missplay jamais",
               "est aussi beau que ses cheveux",
@@ -101,6 +105,12 @@
           this.$el.classList.add("loaded");
           firebase.auth().onAuthStateChanged((user) => {
             this.user = user;
+            if (user) {
+              db.doc(`users/${user.uid}`).set(
+                { uid: user.uid, displayName: user.displayName },
+                { merge: true }
+              );
+            }
           });
         },
       });
