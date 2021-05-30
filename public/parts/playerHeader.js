@@ -41,9 +41,9 @@ Vue.component("player-header", {
     },
     conquestsCompletion() {
       return (
-        Math.round(
-          (this.completedConquests.length / this.conquests.length) * 10000
-        ) / 100 || 0
+        Math.floor(
+          (this.completedConquests.length / this.conquests.length) * 100
+        ) || 0
       );
     },
   },
