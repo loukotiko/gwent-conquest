@@ -9,7 +9,7 @@ Vue.component("progress-bar", {
     <div v-for="(step, index) in filteredSteps" :key="index"
       class="progress progress-placeholder" :class="'progress--' + stepColor(index)"
       :style="{ width: percentLength(index) + '%', zIndex: 10-index }"></div>
-    <div v-if="value"
+    <div 
       class="progress" :style="{ width: percentCurrentLength + '%', zIndex: 10 }"
       :class="{['progress--' + logoColor]: true, 'progress-placeholder': currentStep === -1}"></div>
     <span class="progress_data" :style="{width: percentCurrentLength + '%'}">
