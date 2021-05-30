@@ -18,7 +18,7 @@ Vue.component("player-header", {
         <div class="player-header-data red-text" v-if="userData.activeConquest === -1">
           Aucun objectif en cours
         </div>
-        <a v-else :href="'/view.html?u=' + user.uid" rel="noopener" target="_blank" class="player-header-data green-text">
+        <a v-else :href="'/current.html?u=' + user.uid" rel="noopener" target="_blank" class="player-header-data green-text">
           <div class="icon">👁</div> Objectif en cours 
         </a>
         <div class="player-header-data">
