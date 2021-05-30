@@ -9,7 +9,7 @@ function isEndedConquest(conquest) {
 
 Vue.component("main-content", {
   template: /* tpl */ `<div class="main-content">
-    <h1 class="scratched-title"><span class="yellow-text">Gwent Conquest</span></h1>
+    <h2 class="scratched-title"><span class="yellow-text">Mes objectifs</span></h2>
 
     <div class="conquest-bar conquest-bar--disactivate">
       <div class="conquest-bar-actions-left">

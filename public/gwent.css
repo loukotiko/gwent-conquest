@@ -25,6 +25,18 @@
 body:not(.transparent) {
   background: #121315 repeat-y center top;
   background-image: url(./img/section-bg/bg-1920.jpg);
+  padding-top: 400px;
+}
+
+body::before {
+  content: "";
+  background: url(./img/section-bg/top.png) no-repeat center top;
+  background-size: contain;
+  height: 570px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 
 button {
@@ -326,9 +338,11 @@ h4,
   min-height: 50px;
 }
 .conquest-bar--disactivate {
-  margin-bottom: 30px;
+  margin-bottom: 60px;
   min-height: auto;
-  margin-top: -60px;
+  margin-top: -83px;
+  z-index: 1;
+  position: relative;
 }
 
 .conquest-bar-view {
@@ -430,8 +444,8 @@ h4,
 }
 
 .scratched-title {
-  font-size: 50px;
-  line-height: 50px;
+  font-size: 30px;
+  line-height: 30px;
   text-align: center;
   overflow: hidden;
   margin-bottom: 50px;
