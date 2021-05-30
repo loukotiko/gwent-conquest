@@ -29,7 +29,7 @@ body:not(.transparent) {
   padding-bottom: 90px;
 }
 
-body::before {
+body:not(.transparent)::before {
   content: "";
   background: url(./img/section-bg/top.png) no-repeat center top;
   background-size: contain;
