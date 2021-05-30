@@ -22,9 +22,6 @@ Vue.component("conquest-bar", {
       </span>
     </template>
     <progress-bar v-else :steps="localConquest.steps" :value="localConquest.value"></progress-bar>
-    <div class="Global progression">
-      Autres trucs en dessous
-    </div>
   </div>
   <div class="conquest-bar-actions-right" v-if="editable && self">
     <template v-if="editing">
