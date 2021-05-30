@@ -36,7 +36,7 @@ Vue.component("player-header", {
     completedConquests() {
       return this.conquests.filter(
         (conquest) =>
-          conquest.value === conquest.steps[conquest.steps.length - 1]
+          conquest.value >= conquest.steps[conquest.steps.length - 1]
       );
     },
     conquestsCompletion() {
