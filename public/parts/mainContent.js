@@ -9,7 +9,17 @@ function isEndedConquest(conquest) {
 
 Vue.component("main-content", {
   template: /* tpl */ `<div class="main-content">
-    <h1 class="scratched-title"><span class="yellow-text">Mes conquêtes</span></h1>
+    <h1 class="scratched-title"><span class="yellow-text">Gwent Conquest</span></h1>
+
+    <div class="conquest-bar conquest-bar--disactivate">
+      <div class="conquest-bar-actions-left">
+        <button class="conquest-bar-active" :class="{'conquest-bar-active--active': !userData || userData.activeConquest === -1}" @click="disactivateConquest"></button>
+      </div>
+
+      <div class="conquest-bar-title">
+        <span class="title yellow-text">Désactiver l'objectif en cours</span>
+      </div>
+    </div>
 
     <transition-group name="flip-list" tag="bars">
       <conquest-bar v-for="(conquest, index) in sortedConquests" :key="conquest.id"
@@ -22,9 +32,9 @@ Vue.component("main-content", {
     </transition-group>
     
     <a :href="'/view.html?u=' + user.uid" rel="noopener" target="_blank" class="see-conquest">
-      <g-button>Voir la conquête en cours</g-button>
+      <g-button>Voir l'objectif en cours</g-button>
     </a>
-    <g-button @click="addConquest">Ajouter une conquête</g-button>
+    <g-button @click="addConquest">Ajouter un objectif</g-button>
 </div>`,
   props: ["user"],
   data() {
@@ -42,6 +52,13 @@ Vue.component("main-content", {
         if (isEndedConquest(c1) && isEndedConquest(c2)) return 0;
         if (isEndedConquest(c1)) return 1;
         if (isEndedConquest(c2)) return -1;
+
+        if (c2.dirty === false && c1.dirty === false) return 0;
+        if (c1.dirty === false) return 1;
+        if (c2.dirty === false) return -1;
+
+        if (this.userData && this.userData.activeConquest === c1.id) return -1;
+        if (this.userData && this.userData.activeConquest === c2.id) return 1;
 
         return percentCompletion(c2) - percentCompletion(c1);
       });
@@ -62,6 +79,14 @@ Vue.component("main-content", {
         .catch((error) => {
           console.error("Error adding document: ", error);
         });
+    },
+    disactivateConquest() {
+      db.doc(`users/${this.user.uid}`).set(
+        {
+          activeConquest: -1,
+        },
+        { merge: true }
+      );
     },
     activateConquest(conquest) {
       db.doc(`users/${this.user.uid}`).set(

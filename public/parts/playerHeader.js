@@ -15,7 +15,7 @@ Vue.component("player-header", {
         <button class="title yellow-text" @click="$emit('logout')">Déconnexion</button>
       </div>
       <div class="player-header-data">
-        Conquêtes <strong>{{completedConquests.length}}/{{conquests.length}}</strong>
+        Objectifs <strong>{{completedConquests.length}}/{{conquests.length}}</strong>
       </div>
       <div class="player-header-data">Complétion <strong>{{conquestsCompletion}}%</strong></div>
     </template>

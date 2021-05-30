@@ -325,6 +325,12 @@ h4,
   margin-bottom: 30px;
   min-height: 50px;
 }
+.conquest-bar--disactivate {
+  margin-bottom: 30px;
+  min-height: auto;
+  margin-top: -60px;
+}
+
 .conquest-bar-view {
   flex-direction: column-reverse;
   align-items: stretch;
