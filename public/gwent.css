@@ -26,6 +26,7 @@ body:not(.transparent) {
   background: #121315 repeat-y center top;
   background-image: url(./img/section-bg/bg-1920.jpg);
   padding-top: 380px;
+  padding-bottom: 90px;
 }
 
 body::before {
