@@ -15,12 +15,6 @@ Vue.component("player-header", {
         <button class="title yellow-text" @click="$emit('logout')">Déconnexion</button>
       </div>
       <template v-if="userData">
-        <div class="player-header-data red-text" v-if="userData.activeConquest === -1">
-          Aucun objectif en cours
-        </div>
-        <a v-else :href="'/current.html?u=' + user.uid" rel="noopener" target="_blank" class="player-header-data green-text">
-          Voir l'objectif en cours 
-        </a>
         <div class="player-header-data">
           Objectifs <strong>{{completedConquests.length}}/{{conquests.length}}</strong>
         </div>

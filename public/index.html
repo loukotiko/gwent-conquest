@@ -45,6 +45,7 @@
             @logout="doLogout"
           ></player-header>
           <main-content :user="user" v-if="user || viewUid"></main-content>
+          <create-overlay :user="user" v-if="user || viewUid"></create-overlay>
           <p class="credits">
             Ce site n'est pas officiel et n'est en aucun cas affilié à CD
             Projekt. Il a été réalisé par Tikoati, un joueur de Gwent qui
@@ -69,6 +70,7 @@
       import "./parts/conquestBar.js";
       import "./parts/progressBar.js";
       import "./parts/gButton.js";
+      import "./parts/createOverlay.js";
 
       function getRandom(array) {
         return array[Math.floor(array.length * Math.random())];

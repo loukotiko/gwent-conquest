@@ -68,6 +68,7 @@
       const db = firebase.firestore();
       const params = new URLSearchParams(location.search);
       const uid = params.get("u");
+      const conquestId = params.get("c");
       const badge = params.get("b") === null ? 1 : +params.get("b");
       const titlePosition = params.get("p");
 
@@ -110,13 +111,18 @@
         },
         mounted() {
           this.$el.classList.add("loaded");
+          if (conquestId)
+            this.$bind(
+              "conquest",
+              db.doc(`users/${uid}/conquests/${conquestId}`)
+            );
         },
         watch: {
-          "userData.activeConquest"(conquestId) {
-            if (conquestId)
+          "userData.activeConquest"(activeConquestId) {
+            if (activeConquestId && !conquestId)
               this.$bind(
                 "conquest",
-                db.doc(`users/${uid}/conquests/${conquestId}`)
+                db.doc(`users/${uid}/conquests/${activeConquestId}`)
               );
           },
         },

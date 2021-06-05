@@ -79,6 +79,10 @@ button {
   text-shadow: none;
 }
 
+.white-text {
+  color: #d9d8cb;
+}
+
 h1,
 h2,
 h3,
@@ -86,6 +90,11 @@ h4,
 .title {
   font-family: GWENT, sans-serif;
   margin: 0;
+}
+
+.subtitle {
+  font-family: HalisGR-Book, sans-serif;
+  margin-top: 10px;
 }
 
 .player-header {
@@ -707,4 +716,34 @@ a.player-header-data .icon {
 .actions-bottom {
   display: flex;
   justify-content: space-between;
+}
+
+.player-header-data select {
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(#0d0d0c),
+    color-stop(#20201f),
+    to(#0d0d0c)
+  );
+  background: -webkit-linear-gradient(top, #0d0d0c, #20201f, #0d0d0c);
+  background: linear-gradient(to bottom, #0d0d0c, #20201f, #0d0d0c);
+  box-shadow: 0 1px 6px rgb(0 0 0 / 75%) inset, 0 4px 8px rgb(0 0 0 / 40%);
+  border: 1px solid #564823;
+  height: 36px;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: flex-start;
+  justify-content: flex-start;
+  position: relative;
+  overflow: hidden;
+  color: #d9d8cb;
+  font-family: HalisGR-Book, sans-serif;
+  width: 100%;
+  font-size: 14px;
+  padding: 0;
+  margin-top: 10px;
 }
