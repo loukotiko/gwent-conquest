@@ -368,20 +368,56 @@ a.player-header-data .icon {
   flex-direction: column-reverse;
   align-items: stretch;
 }
-.conquest-bar-view .conquest-bar-progress {
-  margin-left: 36px;
+.conquest-bar-view .conquest-bar-progress,
+.conquest-bar-view .conquest-bar-title {
+  margin-left: 30px;
 }
 
 .conquest-bar-view .conquest-bar-title {
-  text-align: center;
   margin-top: 20px;
   font-size: 24px;
   padding-right: 0;
 }
 
+.conquest-bar-view.conquest-bar--no-badge .conquest-bar-title {
+  margin-left: 0;
+}
+
+.conquest-bar-view.conquest-bar--title-position-left .conquest-bar-title {
+  text-align: left;
+}
+
+.conquest-bar-view.conquest-bar--title-position-center .conquest-bar-title {
+  text-align: center;
+}
+
+.conquest-bar-view.conquest-bar--title-position-right .conquest-bar-title {
+  text-align: right;
+}
+
+.conquest-bar-view.conquest-bar--title-position-above .conquest-bar-title {
+  top: -41px;
+  text-align: left;
+  z-index: 99;
+  position: relative;
+  margin: 0 70px;
+}
+
+.conquest-bar-view.conquest-bar--title-position-above
+  .progress-bar
+  .progress_data {
+  text-align: right;
+  padding-right: 10px;
+  width: 100% !important;
+}
+
+.conquest-bar-view.conquest-bar--title-position-above.conquest-bar--no-badge
+  .conquest-bar-title {
+  margin-left: 10px;
+}
+
 .conquest-bar-view .conquest-bar-title h2 {
   position: relative;
-  width: 80%;
   margin: auto;
 }
 

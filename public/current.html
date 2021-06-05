@@ -42,7 +42,7 @@
         <div v-if="conquest">
           <div
             class="conquest-bar conquest-bar-view"
-            :class="{ 'conquest-bar--no-badge': noBadge }"
+            :class="{ 'conquest-bar--no-badge': noBadge, ['conquest-bar--title-position-' + titlePosition ]: true }"
           >
             <div class="conquest-bar-title">
               <h2 class="yellow-text" :data-title="conquest.title">
@@ -69,6 +69,7 @@
       const params = new URLSearchParams(location.search);
       const uid = params.get("u");
       const badge = +params.get("b");
+      const titlePosition = params.get("p");
 
       import "./parts/progressBar.js";
 
@@ -84,6 +85,14 @@
         computed: {
           noBadge() {
             return !badge;
+          },
+          titlePosition() {
+            return {
+              c: "center",
+              l: "left",
+              r: "right",
+              a: "above",
+            }[titlePosition];
           },
         },
         methods: {
