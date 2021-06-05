@@ -13,7 +13,7 @@ Vue.component("create-overlay", {
     </div>
   </div>
   <div class="player-header__right">
-    <div class="player-header-data">
+    <div class="player-header-data player-header-data--larger">
       <label>
         Objectif :
         <select v-model="generated.conquest">
@@ -22,7 +22,7 @@ Vue.component("create-overlay", {
         </select>
       </label>
     </div>
-    <div class="player-header-data">
+    <div class="player-header-data player-header-data--larger">
       <label>
         Avec badge :
         <select v-model="generated.badge">
@@ -31,7 +31,7 @@ Vue.component("create-overlay", {
         </select>
       </label>
     </div>
-    <div class="player-header-data">
+    <div class="player-header-data player-header-data--larger">
       <label>
         Position :
         <select v-model="generated.position">
@@ -42,10 +42,7 @@ Vue.component("create-overlay", {
         </select>
       </label>
     </div>
-    <div class="player-header-data red-text" v-if="!generated.conquest && userData && userData.activeConquest === -1">
-      Aucun objectif en cours
-    </div>
-    <a v-else :href="generatedLink" rel="noopener" target="_blank" class="player-header-data green-text">
+    <a :href="generatedLink" rel="noopener" target="_blank" class="player-header-data green-text">
       Générer mon lien
     </a>
   </div>
@@ -62,12 +59,12 @@ Vue.component("create-overlay", {
     generatedLink() {
       const link = new URL("/current.html", location.origin);
       link.searchParams.set("u", viewUid || this.user.uid);
+
+      link.searchParams.set("b", this.generated.badge);
+      link.searchParams.set("p", this.generated.position);
+
       if (!!this.generated.conquest)
         link.searchParams.set("c", this.generated.conquest);
-      if (!!this.generated.badge)
-        link.searchParams.set("b", this.generated.badge);
-      if (!!this.generated.position)
-        link.searchParams.set("p", this.generated.position);
 
       return link;
     },

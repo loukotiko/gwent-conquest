@@ -747,3 +747,12 @@ a.player-header-data .icon {
   padding: 0;
   margin-top: 10px;
 }
+
+.player-header-data.player-header-data--larger {
+  width: 188px;
+}
+
+.player-header-data select option {
+  background: rgb(0, 0, 0);
+  color: white;
+}
