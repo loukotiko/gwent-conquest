@@ -68,7 +68,7 @@
       const db = firebase.firestore();
       const params = new URLSearchParams(location.search);
       const uid = params.get("u");
-      const badge = +params.get("b");
+      const badge = params.get("b") === null ? 1 : +params.get("b");
       const titlePosition = params.get("p");
 
       import "./parts/progressBar.js";
@@ -92,7 +92,7 @@
               l: "left",
               r: "right",
               a: "above",
-            }[titlePosition];
+            }[titlePosition || "c"];
           },
         },
         methods: {

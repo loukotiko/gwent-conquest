@@ -377,14 +377,17 @@ a.player-header-data .icon {
   margin-top: 20px;
   font-size: 24px;
   padding-right: 0;
+  margin-right: 30px;
 }
 
 .conquest-bar-view.conquest-bar--no-badge .conquest-bar-title {
   margin-left: 0;
+  margin-right: 0;
 }
 
 .conquest-bar-view.conquest-bar--title-position-left .conquest-bar-title {
   text-align: left;
+  margin-right: 0;
 }
 
 .conquest-bar-view.conquest-bar--title-position-center .conquest-bar-title {
@@ -393,6 +396,7 @@ a.player-header-data .icon {
 
 .conquest-bar-view.conquest-bar--title-position-right .conquest-bar-title {
   text-align: right;
+  margin-right: 0;
 }
 
 .conquest-bar-view.conquest-bar--title-position-above .conquest-bar-title {
