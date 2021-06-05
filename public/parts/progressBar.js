@@ -1,6 +1,6 @@
 Vue.component("progress-bar", {
-  template: /* tpl */ `<div class="progress-bar">
-  <img
+  template: /* tpl */ `<div class="progress-bar" :class="{ 'progress-bar--no-badge': noBadge }">
+  <img v-if="!noBadge"
     :src="'/img/profile/bars/' + logoColor + '.png'"
     alt="GWENT"
     class="progress-bar__logo"
@@ -18,7 +18,7 @@ Vue.component("progress-bar", {
     </span>
   </div>
 </div>`,
-  props: ["steps", "value"],
+  props: ["steps", "value", "noBadge"],
   computed: {
     filteredSteps() {
       return this.steps.filter((step) => !!+step);

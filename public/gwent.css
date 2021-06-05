@@ -288,59 +288,59 @@ a.player-header-data .icon {
 }
 
 .progress-bar__bar .progress--bronze {
-  background-image: url(../img/profile/bars/bronze-bar.jpg);
+  background-image: url(../img/profile/bars/gwent-bar.jpg);
 }
 .progress-bar__bar .progress--bronze::after {
-  background-image: url(../img/profile/bars/bronze-end.png);
+  background-image: url(../img/profile/bars/gwent-end.png);
 }
 
 .progress-bar__bar .progress--silver {
-  background-image: url(../img/profile/bars/silver-bar.jpg);
+  background-image: url(../img/profile/bars/gwent-bar.jpg);
 }
 .progress-bar__bar .progress--silver::after {
-  background-image: url(../img/profile/bars/silver-end.png);
+  background-image: url(../img/profile/bars/gwent-end.png);
 }
 
 .progress-bar__bar .progress--gold {
-  background-image: url(../img/profile/bars/gold-bar.jpg);
+  background-image: url(../img/profile/bars/gwent-bar.jpg);
 }
 .progress-bar__bar .progress--gold::after {
-  background-image: url(../img/profile/bars/gold-end.png);
+  background-image: url(../img/profile/bars/gwent-end.png);
 }
 
 .progress-bar__bar .progress--empty {
-  background-image: url(../img/profile/bars/empty-bar.jpg);
+  background-image: url(../img/profile/bars/gwent-bar.jpg);
 }
 .progress-bar__bar .progress--empty::after {
-  background-image: url(../img/profile/bars/empty-end.png);
+  background-image: url(../img/profile/bars/gwent-end.png);
 }
 
 .progress-bar__bar .progress-placeholder.progress--bronze {
-  background-image: url(../img/profile/bars/bronze-bar-placeholder.jpg);
+  background-image: url(../img/profile/bars/empty-bar.jpg);
 }
 .progress-bar__bar .progress-placeholder.progress--bronze::after {
-  background-image: url(../img/profile/bars/bronze-end-placeholder.png);
+  background-image: url(../img/profile/bars/empty-end.png);
 }
 
 .progress-bar__bar .progress-placeholder.progress--silver {
-  background-image: url(../img/profile/bars/silver-bar-placeholder.jpg);
+  background-image: url(../img/profile/bars/empty-bar.jpg);
 }
 .progress-bar__bar .progress-placeholder.progress--silver::after {
-  background-image: url(../img/profile/bars/silver-end-placeholder.png);
+  background-image: url(../img/profile/bars/empty-end.png);
 }
 
 .progress-bar__bar .progress-placeholder.progress--gold {
-  background-image: url(../img/profile/bars/gold-bar-placeholder.jpg);
+  background-image: url(../img/profile/bars/empty-bar.jpg);
 }
 .progress-bar__bar .progress-placeholder.progress--gold::after {
-  background-image: url(../img/profile/bars/gold-end-placeholder.png);
+  background-image: url(../img/profile/bars/empty-end.png);
 }
 
 .progress-bar__bar .progress-placeholder.progress--gwent {
-  background-image: url(../img/profile/bars/gwent-bar-placeholder.jpg);
+  background-image: url(../img/profile/bars/empty-bar.jpg);
 }
 .progress-bar__bar .progress-placeholder.progress--gwent::after {
-  background-image: url(../img/profile/bars/gwent-end-placeholder.png);
+  background-image: url(../img/profile/bars/empty-end.png);
 }
 
 .progress-bar__bar .progress_data {
@@ -376,6 +376,7 @@ a.player-header-data .icon {
   text-align: center;
   margin-top: 20px;
   font-size: 24px;
+  padding-right: 0;
 }
 
 .conquest-bar-view .conquest-bar-title h2 {
@@ -392,6 +393,14 @@ a.player-header-data .icon {
   left: 0;
   right: 0;
   z-index: -1;
+}
+
+.conquest-bar--no-badge .conquest-bar-progress {
+  margin-left: 0;
+}
+
+.conquest-bar--no-badge .progress-bar .progress_data {
+  padding: 0 10px;
 }
 
 .conquest-bar-actions-left {

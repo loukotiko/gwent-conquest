@@ -40,8 +40,11 @@ Vue.component("main-content", {
         @validate="(conquest) => validateConquest(conquest)"
       ></conquest-bar>
     </transition-group>
-    <div v-if="!sortedConquests.length" class="loading">
+    <div v-if="!initialized" class="loading">
       Chargement des objectifs...
+    </div>
+    <div v-else-if="!sortedConquests.length" class="loading">
+      Aucun objectif
     </div>
     
     <div class="actions-bottom" v-if="self">
@@ -57,6 +60,7 @@ Vue.component("main-content", {
       active: 0,
       conquests: [],
       userData: {},
+      initialized: false,
     };
   },
   computed: {
@@ -94,7 +98,7 @@ Vue.component("main-content", {
       db.collection(`users/${this.user.uid}/conquests`)
         .add({
           title: "Nouvel objectif",
-          steps: [1, 2, 3, 4],
+          steps: [0, 0, 0, 1],
           value: 0,
           dirty: false,
         })
@@ -157,7 +161,11 @@ Vue.component("main-content", {
       handler(id) {
         if (id) {
           this.$bind("userData", db.doc(`users/${id}`));
-          this.$bind("conquests", db.collection(`users/${id}/conquests`));
+          this.$bind("conquests", db.collection(`users/${id}/conquests`)).then(
+            () => {
+              this.initialized = true;
+            }
+          );
         }
       },
     },

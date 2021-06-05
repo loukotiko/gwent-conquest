@@ -2,6 +2,8 @@
 <html>
   <head>
     <title>Objectif en cours</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
 
     <script defer src="/__/firebase/8.6.3/firebase-app.js"></script>
@@ -38,7 +40,10 @@
     <div class="wrapper">
       <div id="app" class="content">
         <div v-if="conquest">
-          <div class="conquest-bar conquest-bar-view">
+          <div
+            class="conquest-bar conquest-bar-view"
+            :class="{ 'conquest-bar--no-badge': noBadge }"
+          >
             <div class="conquest-bar-title">
               <h2 class="yellow-text" :data-title="conquest.title">
                 {{conquest.title}}
@@ -46,6 +51,7 @@
             </div>
             <div class="conquest-bar-progress">
               <progress-bar
+                :no-badge="noBadge"
                 :steps="conquest.steps"
                 :value="conquest.value"
               ></progress-bar>
@@ -62,6 +68,7 @@
       const db = firebase.firestore();
       const params = new URLSearchParams(location.search);
       const uid = params.get("u");
+      const badge = +params.get("b");
 
       import "./parts/progressBar.js";
 
@@ -73,6 +80,12 @@
             userData: null,
             conquest: null,
           };
+        },
+        computed: {
+          noBadge() {
+            console.log({ badge });
+            return !badge;
+          },
         },
         methods: {
           doLogin() {

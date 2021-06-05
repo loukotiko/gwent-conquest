@@ -19,7 +19,7 @@ Vue.component("player-header", {
           Aucun objectif en cours
         </div>
         <a v-else :href="'/current.html?u=' + user.uid" rel="noopener" target="_blank" class="player-header-data green-text">
-          <div class="icon">👁</div> Objectif en cours 
+          Voir l'objectif en cours 
         </a>
         <div class="player-header-data">
           Objectifs <strong>{{completedConquests.length}}/{{conquests.length}}</strong>
